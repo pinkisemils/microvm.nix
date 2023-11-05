@@ -20,6 +20,14 @@ in
     vms = mkOption {
       type = with types; attrsOf (submodule ({ config, name, ... }: {
         options = {
+          extraModules = mkOption {
+            description = lib.mdDoc ''
+                Extra modules to pass for the desired configuration of this MicroVM.
+              '';
+              default = [];
+              type = with types; listOf anything;
+          };
+
           config = mkOption {
             description = lib.mdDoc ''
               A specification of the desired configuration of this MicroVM,
@@ -40,7 +48,7 @@ in
                   in [
                     extraConfig
                     ./microvm
-                  ] ++ (map (x: x.value) defs);
+                  ] ++ config.extraModules ++ (map (x: x.value) defs);
                 prefix = [ "microvm" "vms" name "config" ];
                 inherit (config) specialArgs pkgs;
                 inherit (config.pkgs) system;
