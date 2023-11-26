@@ -406,8 +406,6 @@ in
               --rlimit-nofile ${toString serviceConfig.LimitNOFILE} \
               --thread-pool-size `nproc` \
               --posix-acl --xattr \
-              --sandbox=chroot \
-              --announce-submounts \
               &
             # detach from shell, but remain in systemd cgroup
             disown
