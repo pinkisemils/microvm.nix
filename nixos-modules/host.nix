@@ -406,6 +406,7 @@ in
               --rlimit-nofile ${toString serviceConfig.LimitNOFILE} \
               --thread-pool-size `nproc` \
               --posix-acl --xattr \
+              --announce-submounts \
               &
             # detach from shell, but remain in systemd cgroup
             disown
